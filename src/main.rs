@@ -21,7 +21,7 @@ fn shell_loop(){
             break;
         }
         else {
-            println!(">>{}",input);
+            println!("{}",input);
         }
     }
 }
