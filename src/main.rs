@@ -1,4 +1,4 @@
-use std::{env, ops::ControlFlow::Break};
+use std::env;
 
 const BANG:&str = r#" 
  \
@@ -13,8 +13,6 @@ Bang! Bang!                       |       \
                                   |         \
                                   |__________|
 "#;
-const PRIMARY_COMMAND:[&str;2] = ["lol","olo"]; 
-
 
 fn parse_input(fninput:String){
     let temp:Vec<&str> = fninput.split_whitespace().collect();
