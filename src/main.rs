@@ -1,4 +1,5 @@
 use std::env;
+use std::process::Command;
 
 const BANG:&str = r#" 
  \
@@ -14,14 +15,17 @@ Bang! Bang!                       |       \
                                   |__________|
 "#;
 
-fn parse_input(fninput:String){
+
+
+
+fn parse_input(fninput:String)->String{
     let temp:Vec<&str> = fninput.split_whitespace().collect();
-    if temp.len() == 0{
-        return;
-    }
-    for i in temp{
-        println!("{}",i);
-    }
+    println!("{:?}",temp);
+    println!("{:?}",temp[0]);
+    let mut command_opt = Command::new(temp[0]).output().expect("input was wrong");
+    let outp = String::from_utf8_lossy(&command_opt.stdout).to_string();
+    return outp;
+
 }
 
 
@@ -33,13 +37,14 @@ fn shell_loop(mode:bool){
         let prompt = "".to_string() + &path.display().to_string() + ">>";
         let input = if mode == true {rprompt::prompt_reply(prompt).unwrap()
                             }else{
-                                "ls -l".to_string()
+                                "ls".to_string()
                             };
         if input == "BANG"|| input == "bang"{
             println!("{}",BANG);
             break;
         }
-        parse_input(input);
+        let opt = parse_input(input);
+        println!("{:?}",opt.to_string().replace("\n","/"));
         break;
     }   
 }
