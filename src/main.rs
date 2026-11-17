@@ -42,7 +42,7 @@ fn shell_loop(mode:bool){
             break;
         }
         let opt = parse_input(input);
-        println!(">>{:?}",opt);
+        println!(">>{}",opt);
     }   
 }
 
